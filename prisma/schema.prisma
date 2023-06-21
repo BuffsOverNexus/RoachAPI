@@ -10,9 +10,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Todo {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  text      String
-  completed Boolean
+model Announcement {
+  id    Int   @id @default(autoincrement())
+  title String
+  posted DateTime @default(now())
+  userId Int // This is the userId from Roach
+  content String
 }
