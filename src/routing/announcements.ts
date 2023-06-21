@@ -33,4 +33,23 @@ router.post("/announcement", async (req: Request, res: Response) => {
     }
 });
 
+
+router.delete("/announcement", async (req: Request, res: Response) => {
+    try {
+        if (req.body.id) {
+            const id = Number(req.body.id);
+            const deletedAnnouncement = await prisma.announcement.delete({
+                where: {
+                    id
+                }
+            });
+            res.json(deletedAnnouncement);
+        } else {
+            res.status(400).send("This API requires: id");
+        }
+    } catch (e: any) {
+        generateException(res, e);
+    }
+});
+
 export default router;
